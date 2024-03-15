@@ -31,6 +31,8 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    // If performance concerns arise, they are more effectively 
+    // addressed through proper indexing, query optimization, and database tuning rather than a fundamental change in how data is stored. 
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
 
