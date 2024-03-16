@@ -1,9 +1,8 @@
 package com.example.fooddelivery.entity;
 
 import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+
+import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.example.fooddelivery.config.authorization.Role;
@@ -23,105 +22,57 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String firstname;
-    private String lastname;
+
+    @Column(unique = true)
     private String email;
-    private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    // If performance concerns arise, they are more effectively 
-    // addressed through proper indexing, query optimization, and database tuning rather than a fundamental change in how data is stored. 
-    @OneToMany(mappedBy = "user")
-    private List<Token> tokens;
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_additional_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> additionalRoles;
 
-    private boolean accountNonExpired;
-    private boolean accountNonLocked;
-    private boolean credentialsNonExpired;
-    private boolean enabled;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+    private PasswordCredential passwordCredential;
 
-    private Date lastPasswordResetDate;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+    private UserProfile userProfile;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return role.getAuthorities();
     }
-
+    
+    // Implementing missing methods from UserDetails
     @Override
     public String getPassword() {
-        return password;
+        return this.passwordCredential.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return email;
+        return this.email;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return accountNonExpired;
+        return this.passwordCredential.isAccountNonExpired();
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return accountNonLocked;
+        return this.passwordCredential.isAccountNonLocked();
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        if (!credentialsNonExpired) {
-            return false; // Manually marked as expired
-        }
-        
-        // Assuming you still want to use lastPasswordResetDate to automatically determine expiration
-        if (lastPasswordResetDate == null) {
-            return true; // Never reset, so not expired
-        }
-        long diff = new Date().getTime() - lastPasswordResetDate.getTime();
-        long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-        return days < 90; // Assuming credentials expire after 90 days
+        return this.passwordCredential.isCredentialsNonExpired();
     }
 
     @Override
     public boolean isEnabled() {
-        return enabled;
-    }
-
-    // Management methods
-    public void lockAccount() {
-        this.accountNonLocked = false;
-    }
-
-    public void unlockAccount() {
-        this.accountNonLocked = true;
-    }
-
-    public void expireAccount() {
-        this.accountNonExpired = false;
-    }
-
-    public void unexpireAccount() {
-        this.accountNonExpired = true;
-    }
-
-    public void expireCredentials() {
-        this.credentialsNonExpired = false;
-    }
-
-    public void unexpireCredentials() {
-        this.credentialsNonExpired = true;
-    }
-
-    public void enableAccount() {
-        this.enabled = true;
-    }
-
-    public void disableAccount() {
-        this.enabled = false;
-    }
-
-    public void updatePasswordResetDate() {
-        this.lastPasswordResetDate = new Date();
+        return this.passwordCredential.isEnabled();
     }
 }

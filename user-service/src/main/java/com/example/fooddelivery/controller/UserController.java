@@ -1,6 +1,8 @@
 package com.example.fooddelivery.controller;
 
-import com.example.fooddelivery.entity.User;
+import com.example.fooddelivery.dto.CreateUserRequest;
+import com.example.fooddelivery.dto.UpdateUserRequest;
+import com.example.fooddelivery.dto.UserDto;
 import com.example.fooddelivery.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -18,25 +20,27 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        // Implement logic to fetch all users
-        return ResponseEntity.ok(userService.getAllUsers());
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        List<UserDto> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
-        return ResponseEntity.ok(userService.getUserById(id));
+    public ResponseEntity<UserDto> getUserById(@PathVariable Integer id) {
+        UserDto userDto = userService.getUserById(id);
+        return ResponseEntity.ok(userDto);
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(user));
+    public ResponseEntity<UserDto> createUser(@RequestBody CreateUserRequest request) {
+        UserDto createdUserDto = userService.createUser(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdUserDto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user) {
-        user.setId(id);
-        return ResponseEntity.ok(userService.updateUser(user));
+    public ResponseEntity<UserDto> updateUser(@PathVariable Integer id, @RequestBody UpdateUserRequest request) {
+        UserDto updatedUser = userService.updateUser(id, request);
+        return ResponseEntity.ok(updatedUser);
     }
 
     @DeleteMapping("/{id}")
