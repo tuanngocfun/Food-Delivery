@@ -7,6 +7,9 @@ import com.example.fooddelivery.entity.User;
 import com.example.fooddelivery.entity.UserProfile;
 import com.example.fooddelivery.repository.TokenRepository;
 import com.example.fooddelivery.repository.UserRepository;
+import com.example.fooddelivery.service.CustomUserDetailsService;
+import com.example.fooddelivery.repository.PasswordCredentialRepository;
+import com.example.fooddelivery.repository.UserProfileRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,7 +20,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.example.fooddelivery.repository.PasswordCredentialRepository;
+
 
 import java.io.IOException;
 
@@ -26,9 +29,12 @@ import java.io.IOException;
 public class AuthenticationService {
   private final UserRepository repository;
   private final TokenRepository tokenRepository;
+  private final PasswordCredentialRepository passwordCredentialRepository;
+  private final UserProfileRepository userProfileRepository;
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
+  private final CustomUserDetailsService userDetailsService;
 
   public AuthenticationResponse register(RegisterRequest request) {
     PasswordCredential passwordCredential = new PasswordCredential();
@@ -67,7 +73,7 @@ public class AuthenticationService {
             .accessToken(jwtToken)
             .refreshToken(refreshToken)
             .build();
-}
+  }
 
 
   public AuthenticationResponse authenticate(AuthenticationRequest request) {
