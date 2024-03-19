@@ -3,6 +3,9 @@ package com.example.fooddelivery.config.security;
 import java.time.LocalDateTime;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class RequestLimitService {
 
     private final ConcurrentHashMap<String, Integer> loginAttemptsCache = new ConcurrentHashMap<>();

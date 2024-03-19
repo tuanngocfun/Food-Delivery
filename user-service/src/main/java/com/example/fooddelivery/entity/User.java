@@ -44,6 +44,26 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return role.getAuthorities();
     }
+
+    public void setPassword(String newPassword) {
+        if (this.passwordCredential != null) {
+            this.passwordCredential.setPassword(newPassword);
+        } else {
+            // Create a new PasswordCredential instance if it doesn't exist
+            this.passwordCredential = new PasswordCredential();
+            this.passwordCredential.setPassword(newPassword);
+            // Since this is a new credential, we might want to set other properties as well
+            this.passwordCredential.setAccountNonExpired(true);
+            this.passwordCredential.setAccountNonLocked(true);
+            this.passwordCredential.setCredentialsNonExpired(true);
+            this.passwordCredential.setEnabled(true);
+            // Don't forget to associate this new PasswordCredential with the current User
+            this.passwordCredential.setUser(this);
+            // Setting the lastPasswordResetDate might also be a good idea
+            this.passwordCredential.setLastPasswordResetDate(new java.util.Date());
+        }
+    }
+
     
     // Implementing missing methods from UserDetails
     @Override
