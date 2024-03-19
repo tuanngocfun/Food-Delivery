@@ -1,9 +1,8 @@
 package com.example.fooddelivery.config.authentication;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import com.example.fooddelivery.config.JwtProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -19,17 +18,12 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    private final JwtProperties jwtProperties;
-
-    @Autowired
-    public JwtService(JwtProperties jwtProperties) {
-        this.jwtProperties = jwtProperties;
-    }
-
-    private Key getSignInKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(jwtProperties.getSecretKey());
-        return Keys.hmacShaKeyFor(keyBytes);
-    }
+    @Value("${application.security.jwt.secret-key}")
+    private String secretKey;
+    @Value("${application.security.jwt.expiration}")
+    private long jwtExpiration;
+    @Value("${application.security.jwt.refresh-token.expiration}")
+    private long refreshExpiration;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -48,12 +42,12 @@ public class JwtService {
         Map<String, Object> extraClaims,
         UserDetails userDetails
     ) {
-        long expiration = jwtProperties.getExpiration(); // Use jwtProperties for expiration
-        return buildToken(extraClaims, userDetails, expiration);
+        return buildToken(extraClaims, userDetails, jwtExpiration);
     }
 
-    public String generateRefreshToken(UserDetails userDetails) {
-        long refreshExpiration = jwtProperties.getRefreshToken().getExpiration(); // Use jwtProperties for refresh expiration
+    public String generateRefreshToken(
+        UserDetails userDetails
+    ) {
         return buildToken(new HashMap<>(), userDetails, refreshExpiration);
     }
 
@@ -62,7 +56,8 @@ public class JwtService {
             UserDetails userDetails,
             long expiration
     ) {
-        return Jwts.builder()
+        return Jwts
+                .builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
@@ -85,10 +80,16 @@ public class JwtService {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder()
+        return Jwts
+            .parserBuilder()
             .setSigningKey(getSignInKey())
             .build()
             .parseClaimsJws(token)
             .getBody();
+    }
+
+    private Key getSignInKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 }

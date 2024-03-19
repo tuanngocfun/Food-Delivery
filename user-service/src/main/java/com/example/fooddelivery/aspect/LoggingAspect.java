@@ -18,7 +18,7 @@ public class LoggingAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 
-    @Pointcut("within(com.example.fooddelivery..*)")
+    @Pointcut("within(com.example.fooddelivery.*)")
     public void applicationPackagePointcut() {
         // Method is empty as this is just a Pointcut, the implementations are in the advices.
         // This space intentionally left blank. Pointcut declarations do not have a body.

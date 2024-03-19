@@ -25,7 +25,13 @@ application:
 server:
     port: 8443
     ssl:
-        key-store: classpath:keystore.p12
-        key-store-password: your_password
+        key-store: classpath:newkeystore.p12
+        key-store-password: newpassword
         keyStoreType: PKCS12
-        keyAlias: myalias
+        keyAlias: newalias
+logging:
+    level:
+        root: WARN
+        org.springframework: DEBUG
+        org.springframework.security: DEBUG
+        com.example.fooddelivery: DEBUG
