@@ -1,0 +1,29 @@
+server:
+  port: 8084
+
+kafka:
+  server: localhost:9092
+  group:
+    id: group1
+  producer:
+    id: producer1
+
+spring:
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+  instance:
+    hostname: localhost
+
+  application:
+    name: notification-service
+  mvc:
+    cors:
+      allowed-origins: "*"
+      allowed-methods: "*"
+      allowed-headers: "*"
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
