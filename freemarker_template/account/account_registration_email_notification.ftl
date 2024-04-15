@@ -11,7 +11,7 @@
 	<meta name="format-detection" content="date=no" />
 	<meta name="format-detection" content="address=no" />
 	<meta name="format-detection" content="email=no" />
-	<title>AdZiggy | Email verification</title>
+	<title>Adfoodzy | Email verification</title>
 	<style type="text/css">
 	.ExternalClass {
 		width: 100%;

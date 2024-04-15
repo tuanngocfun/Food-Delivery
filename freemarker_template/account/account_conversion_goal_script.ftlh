@@ -11,7 +11,7 @@
 	<meta name="format-detection" content="date=no" />
 	<meta name="format-detection" content="address=no" />
 	<meta name="format-detection" content="email=no" />
-	<title>AdZiggy | Account conversion goal script</title>
+	<title>Adfoodzy | Account conversion goal script</title>
 	<style type="text/css">
 	.ExternalClass {
 		width: 100%;

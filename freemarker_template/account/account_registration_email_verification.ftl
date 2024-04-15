@@ -11,7 +11,7 @@
 	<meta name="format-detection" content="date=no" />
 	<meta name="format-detection" content="address=no" />
 	<meta name="format-detection" content="email=no" />
-	<title>AdZiggy | Email verification</title>
+	<title>Adfoodzy | Email verification</title>
 	<style type="text/css">
 	.ExternalClass {
 		width: 100%;
@@ -656,7 +656,7 @@
 														<table width="100%" border="0" cellpadding="0" cellspacing="0" style="font-size: 13px; min-width: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 															<tr>
 																<td class="image-td" align="center" valign="top" width="610">
-																	<img src="http://adziggy.img-us10.com/public//254d5218ac5e71c108e3f0ca62b06438.png?r=623724033" alt="" width="250" style="display: block; border: none; outline: none; width: 250px; opacity: 1; max-width: 100%;" />
+																	<img src="http://adfoodzy.img-us10.com/public//254d5218ac5e71c108e3f0ca62b06438.png?r=623724033" alt="" width="250" style="display: block; border: none; outline: none; width: 250px; opacity: 1; max-width: 100%;" />
 																</td>
 															</tr>
 														</table>
@@ -799,16 +799,16 @@
 <#--																						<tr>-->
 <#--																							<td align="center" valign="middle" width="34" style="display: inline-block !important; font-size: 0; width: 34px !important;">-->
 <#--																								<div class="__ac_social_icons" style="margin: 0; outline: none; padding: 0;">-->
-<#--																									<a href="https://www.facebook.com/AdZiggy-1936814379743286/" id="facebook" class="__ac_social_icon_link" style="margin: 0; outline: none; padding: 0; color: #045FB4;">-->
-<#--																										<img src="http://adziggy.img-us3.com/_social_/flat-outline-dark-round-facebook.png" alt="flat-outline-dark-round-facebook.png" border="0" width="34" style="border: none;" />-->
+<#--																									<a href="https://www.facebook.com/adfoodzy-1936814379743286/" id="facebook" class="__ac_social_icon_link" style="margin: 0; outline: none; padding: 0; color: #045FB4;">-->
+<#--																										<img src="http://adfoodzy.img-us3.com/_social_/flat-outline-dark-round-facebook.png" alt="flat-outline-dark-round-facebook.png" border="0" width="34" style="border: none;" />-->
 <#--																									</a>-->
 <#--																								</div>-->
 <#--																							</td>-->
 <#--																							<td width="10" style="display: inline-block !important; font-size: 0; width: 10px !important;"> </td>-->
 <#--																							<td align="center" valign="middle" width="34" style="display: inline-block !important; font-size: 0; width: 34px !important;">-->
 <#--																								<div class="__ac_social_icons" style="margin: 0; outline: none; padding: 0;">-->
-<#--																									<a href="https://www.linkedin.com/company/adziggy/" id="linkedin" class="__ac_social_icon_link" style="margin: 0; outline: none; padding: 0; color: #045FB4;">-->
-<#--																										<img src="http://adziggy.img-us3.com/_social_/flat-outline-dark-round-linkedin.png" alt="flat-outline-dark-round-linkedin.png" border="0" width="34" style="border: none;" />-->
+<#--																									<a href="https://www.linkedin.com/company/adfoodzy/" id="linkedin" class="__ac_social_icon_link" style="margin: 0; outline: none; padding: 0; color: #045FB4;">-->
+<#--																										<img src="http://adfoodzy.img-us3.com/_social_/flat-outline-dark-round-linkedin.png" alt="flat-outline-dark-round-linkedin.png" border="0" width="34" style="border: none;" />-->
 <#--																									</a>-->
 <#--																								</div>-->
 <#--																							</td>-->

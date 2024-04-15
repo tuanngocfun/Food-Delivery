@@ -102,7 +102,7 @@ public class AmazonS3Service {
             logger.info(String.format("\t- File MD5: %s", putObjectResult.getContentMd5()));
             logger.info(String.format("\t- File URL: %s", fileUrl.toString()));
             logger.info(String.format("Original File URL: %s", fileUrl.toString()));
-            return UriComponentsBuilder.fromHttpUrl("https://static.adziggy.com")
+            return UriComponentsBuilder.fromHttpUrl("https://static.adfoodzy.com")
                     .path(filePath)
                     .build().encode().toUri().toString();
         } else {
