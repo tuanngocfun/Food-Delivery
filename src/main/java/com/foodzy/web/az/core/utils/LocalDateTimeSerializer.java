@@ -4,20 +4,29 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.Objects;
 
 public class LocalDateTimeSerializer extends JsonSerializer<LocalDateTime> {
+    private final ZoneOffset zone;
+
+    public LocalDateTimeSerializer() {
+        this(ZoneOffset.UTC);  // Default to UTC
+    }
+
+    public LocalDateTimeSerializer(ZoneOffset zone) {
+        this.zone = zone;
+    }
 
     @Override
     public void serialize(LocalDateTime localDateTime, JsonGenerator jsonGenerator, SerializerProvider serializers)
             throws IOException, JsonProcessingException {
-        if (Objects.isNull(localDateTime))
+        if (localDateTime == null) {
             jsonGenerator.writeNull();
-        else
-            jsonGenerator.writeNumber(localDateTime.toInstant(ZoneOffset.UTC).toEpochMilli());
+        } else {
+            long timestamp = localDateTime.toInstant(zone).toEpochMilli();
+            jsonGenerator.writeNumber(timestamp);
+        }
     }
 }
